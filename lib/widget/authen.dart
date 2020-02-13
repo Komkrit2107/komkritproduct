@@ -51,7 +51,7 @@ class _AuthenState extends State<Authen> {
   Widget showLogo() {
     return Container(
       height: 120.0,
-      child: Image.asset('images/logo.png'),
+      child: Image.asset('images/logo12.png'),
     );
   }
 
