@@ -121,13 +121,19 @@ class _RegisterState extends State<Register> {
             rePassword.isEmpty) {
           normalDialog(context, 'Have Space', 'Please File Every Blank');
         } else if (password == rePassword) {
-          
+          registerThread();
         } else {
           normalDialog(context, 'Password Not Math', 'Pleese Type Password Math Re Password');
         }
       },
     );
   }
+   //Call API เป็น PHP กำหนดค่าต้องใส่ $นำมา 
+   Future<void> registerThread()async{
+    String url ='https://www.androidthai.in.th/feb13/addUserKrit.php?isAdd=true&Name=$name&User=$user&Password=$password';
+
+
+   }
 
   //จะห่างข้างละ 30.0
   @override
