@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:kritproduct/utility/my_style.dart';
 import 'package:kritproduct/utility/normal_dialog.dart';
@@ -131,7 +132,17 @@ class _RegisterState extends State<Register> {
    //Call API เป็น PHP กำหนดค่าต้องใส่ $นำมา 
    Future<void> registerThread()async{
     String url ='https://www.androidthai.in.th/feb13/addUserKrit.php?isAdd=true&Name=$name&User=$user&Password=$password';
-
+    try {
+        Response response = await Dio().get(url);
+        print('reponse =$response');
+        if (response.toString()== 'true') {
+           Navigator.of(context).pop();
+        } else {
+          normalDialog(context, 'ลงทะเบียนไม่สำเร็จ', 'ลองใหม่อีกครั้ง');
+        }
+    } catch (e) {
+      
+    }
 
    }
 

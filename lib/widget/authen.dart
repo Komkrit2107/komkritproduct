@@ -1,5 +1,12 @@
+import 'dart:convert';
+import 'dart:ffi';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:kritproduct/utility/models/user_model.dart';
 import 'package:kritproduct/utility/my_style.dart';
+import 'package:kritproduct/utility/normal_dialog.dart';
+import 'package:kritproduct/widget/list_product.dart';
 import 'package:kritproduct/widget/register.dart';
 
 //สร้าง Authen Ctrl Z = เรียกคืนตั้งแต่ตัน
@@ -11,11 +18,16 @@ class Authen extends StatefulWidget {
 class _AuthenState extends State<Authen> {
   //Field
 
+  String user, password;
+
   //Method ให้แสดงส่วนด้านล่าง โดยการเอา ให้แสดง Keyborad()
   Widget userForm() {
     return Container(
       width: 250.0,
       child: TextField(
+        onChanged: (value) {
+          user = value.trim();
+        },
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
@@ -34,6 +46,10 @@ class _AuthenState extends State<Authen> {
     return Container(
       width: 250.0,
       child: TextField(
+        obscureText: true,
+        onChanged: (value) {
+          password = value.trim();
+        },
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
@@ -77,11 +93,52 @@ class _AuthenState extends State<Authen> {
         'Sign In',
         style: TextStyle(color: Colors.white),
       ),
-      onPressed: () {},
+      onPressed: () {
+        if (user == null ||
+            user.isEmpty ||
+            password == null ||
+            password.isEmpty) {
+          normalDialog(context, 'มีช่องว่าง', 'กรุณา กรอกทุกช่อง สิ คะ');
+        } else {
+          checkAuthen();
+        }
+      },
     );
   }
+  //ตรวจสอบค่า และประกาศตัวแปรชื่อ checkAuthen
 
-  // สร้างปุ่ม Logout
+  Future<void> checkAuthen() async {
+    String url =
+        'https://www.androidthai.in.th/feb13/getUserWhereUserKrit.php?isAdd=true&User=$user';
+    try {
+      Response response = await Dio().get(url);
+      print('reponse =$response');
+      if (response.toString() == 'null') {
+        normalDialog(context, 'User False', 'No $user in my Database');
+      } else {
+        // ถอนรหัสออกมาเป็น ภาษาไทย จาก json
+        var result = json.decode(response.data);
+        print('result = $result');
+        for (var map in result) {
+          print('map = $map');
+          UserModel userModel = UserModel.fromMap(map);
+
+          if (password == userModel.password) {
+            MaterialPageRoute materialPageRoute =
+                MaterialPageRoute(builder: (BuildContext buildContext) {
+              return ListProduct(userModel: userModel,);
+            });
+            Navigator.of(context).push(materialPageRoute);
+          } else {
+            normalDialog(
+                context, 'Password False', 'Try Agains Password False');
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  // สร้างปุ่ม ลงทะเบียน ก่อน
   Widget singUpButton() {
     return OutlineButton(
       borderSide: BorderSide(color: MyStyle().textColor),
@@ -94,10 +151,8 @@ class _AuthenState extends State<Authen> {
         MaterialPageRoute materialPageRoute =
             MaterialPageRoute(builder: (BuildContext buildContext) {
           return Register();
-          
         });
-       Navigator.of(context).push(materialPageRoute); //การทำ Route หน้าถัดไป
-
+        Navigator.of(context).push(materialPageRoute); //การทำ Route หน้าถัดไป
       },
     );
   }
