@@ -29,8 +29,9 @@ class _ListProductState extends State<ListProduct> {
   }
 
   Widget showTitle(){
-    return Text('Product');
+    return Text('FundSmart Link');
   }
+
   //ต้องการให้อยู่บรรทัดเดียวกัน
   Widget showName(){
     return Column(mainAxisAlignment: MainAxisAlignment.center,

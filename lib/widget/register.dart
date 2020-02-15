@@ -35,6 +35,11 @@ class _RegisterState extends State<Register> {
           )),
     );
   }
+  
+  //Title Bar นำไปใส่ไว้ใน Appbar
+  Widget showSTitle() {
+    return Text('Register');
+  }
 
   Widget userForm() {
     //ประกาศตัวแปร เป็นสี
@@ -62,7 +67,8 @@ class _RegisterState extends State<Register> {
   Widget passwordForm() {
     //ประกาศตัวแปร เป็นสี
     Color color = Colors.blueGrey;
-    return TextField(obscureText: true,
+    return TextField(
+      obscureText: true,
       onChanged: (String string) {
         password = string.trim();
       },
@@ -85,7 +91,8 @@ class _RegisterState extends State<Register> {
   Widget rePasswordForm() {
     //ประกาศตัวแปร เป็นสี
     Color color = Colors.purple;
-    return TextField(obscureText: true,
+    return TextField(
+      obscureText: true,
       onChanged: (String string) {
         rePassword = string.trim();
       },
@@ -104,11 +111,12 @@ class _RegisterState extends State<Register> {
           )),
     );
   }
+
   //กำหนดค่าตัวแปร เพื่อให้แจ้ง Message ออกมา
   Widget registerButton() {
     return IconButton(
       tooltip: 'UpLoad To Server',
-      icon: Icon(Icons.cloud_download),
+      icon: Icon(Icons.settings),
       onPressed: () {
         print(
             'name =$name, user =$user, password =$password, rePassword =$rePassword');
@@ -124,27 +132,27 @@ class _RegisterState extends State<Register> {
         } else if (password == rePassword) {
           registerThread();
         } else {
-          normalDialog(context, 'Password Not Math', 'Pleese Type Password Math Re Password');
+          normalDialog(context, 'Password Not Math',
+              'Pleese Type Password Math Re Password');
         }
       },
     );
   }
-   //Call API เป็น PHP กำหนดค่าต้องใส่ $นำมา 
-   Future<void> registerThread()async{
-    String url ='https://www.androidthai.in.th/feb13/addUserKrit.php?isAdd=true&Name=$name&User=$user&Password=$password';
-    try {
-        Response response = await Dio().get(url);
-        print('reponse =$response');
-        if (response.toString()== 'true') {
-           Navigator.of(context).pop();
-        } else {
-          normalDialog(context, 'ลงทะเบียนไม่สำเร็จ', 'ลองใหม่อีกครั้ง');
-        }
-    } catch (e) {
-      
-    }
 
-   }
+  //Call API เป็น PHP กำหนดค่าต้องใส่ $นำมา
+  Future<void> registerThread() async {
+    String url =
+        'https://www.androidthai.in.th/feb13/addUserKrit.php?isAdd=true&Name=$name&User=$user&Password=$password';
+    try {
+      Response response = await Dio().get(url);
+      print('reponse =$response');
+      if (response.toString() == 'true') {
+        Navigator.of(context).pop();
+      } else {
+        normalDialog(context, 'ลงทะเบียนไม่สำเร็จ', 'ลองใหม่อีกครั้ง');
+      }
+    } catch (e) {}
+  }
 
   //จะห่างข้างละ 30.0
   @override
@@ -160,6 +168,7 @@ class _RegisterState extends State<Register> {
         ],
       ),
       appBar: AppBar(
+        title: showSTitle(),
         actions: <Widget>[registerButton()],
         backgroundColor: MyStyle().textColor,
       ), //ดึงมาจาก Mystype ใส่รูป Icon เป็นก้อนเมฆ
