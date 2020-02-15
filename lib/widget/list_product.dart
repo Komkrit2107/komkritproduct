@@ -17,6 +17,7 @@ class _ListProductState extends State<ListProduct> {
   //Field
   String nameLogin = '';
   UserModel currentModel;
+  String name, user, password, rePassword;
 
 
 
@@ -29,8 +30,34 @@ class _ListProductState extends State<ListProduct> {
   }
 
   Widget showTitle(){
-    return Text('FundSmart Link');
+    return Text('SmartFund Link');
   }
+
+ Widget FundForm() {
+    //ประกาศตัวแปร เป็นสี
+    Color color = Colors.purple;
+    return TextField(
+      onChanged: (String string) {
+        user = string.trim();
+      },
+      decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: color),
+          ),
+          helperStyle: TextStyle(color: color),
+          helperText: 'Pleses Select Fund',
+          labelStyle: TextStyle(color: color),
+          labelText: 'Fund Type',
+          icon: Icon(
+            Icons.mail_outline,
+            size: 36.0,
+            color: color,
+          )),
+    );
+  }
+
+
+
 
   //ต้องการให้อยู่บรรทัดเดียวกัน
   Widget showName(){
@@ -47,6 +74,12 @@ class _ListProductState extends State<ListProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       body: ListView(
+        padding: EdgeInsets.all(30.0),
+        children: <Widget>[
+        FundForm(),  
+        ],
+      ),
       appBar: AppBar(actions: <Widget>[showName()],
         title: showTitle(),
         backgroundColor: MyStyle().textColor,),

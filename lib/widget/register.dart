@@ -10,7 +10,8 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   //Field ประกาศตัวแปร
-  String name, user, password, rePassword;
+  String name, user, password, rePassword ;
+  String idciticent, telephone, email;
 
   //Method กำหนดรูปคน และกำหนดค่าสี
   Widget nameForm() {
@@ -41,7 +42,7 @@ class _RegisterState extends State<Register> {
     return Text('Register');
   }
 
-  Widget userForm() {
+  Widget emailForm() {
     //ประกาศตัวแปร เป็นสี
     Color color = Colors.purple;
     return TextField(
@@ -58,6 +59,29 @@ class _RegisterState extends State<Register> {
           labelText: 'Email Address:',
           icon: Icon(
             Icons.mail_outline,
+            size: 36.0,
+            color: color,
+          )),
+    );
+  }
+
+   Widget telephonForm() {
+    //ประกาศตัวแปร เป็นสี
+    Color color = Colors.purple;
+    return TextField(
+      onChanged: (String string) {
+        telephone = string.trim();
+      },
+      decoration: InputDecoration(
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: color),
+          ),
+          helperStyle: TextStyle(color: color),
+          helperText: 'Type Your Telephone in blank',
+          labelStyle: TextStyle(color: color),
+          labelText: 'Telephone No:',
+          icon: Icon(
+            Icons.phone_in_talk,
             size: 36.0,
             color: color,
           )),
@@ -162,7 +186,8 @@ class _RegisterState extends State<Register> {
         padding: EdgeInsets.all(30.0),
         children: <Widget>[
           nameForm(),
-          userForm(),
+          emailForm(),
+          telephonForm(),
           passwordForm(),
           rePasswordForm(),
         ],

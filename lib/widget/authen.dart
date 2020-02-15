@@ -76,13 +76,26 @@ class _AuthenState extends State<Authen> {
     return Text(
       'Wealthrepublic',
       style: TextStyle(
-        fontSize: 30.0,
-        fontWeight: FontWeight.bold,
-        fontStyle: FontStyle.italic,
+        fontSize: 20.0,
+        fontWeight: FontWeight.normal,
+        fontStyle: FontStyle.normal,
         color: MyStyle().textColor,
       ),
     );
   }
+
+   Widget showsAppName() {
+    return Text(
+      'SmartFund Link V 1.8',
+      style: TextStyle(
+        fontSize: 20.0,
+        fontWeight: FontWeight.normal,
+        fontStyle: FontStyle.normal,
+        color: MyStyle().textColor,
+      ),
+    );
+  }
+
 
   // สร้างปุ่ม Login และเปลี่ยนสีปุม ตัวหนังสือ
 
@@ -192,6 +205,7 @@ class _AuthenState extends State<Authen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              showsAppName(),
               showLogo(),
               showAppName(),
               userForm(),
