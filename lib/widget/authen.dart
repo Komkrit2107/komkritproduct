@@ -10,8 +10,6 @@ import 'package:kritproduct/utility/normal_dialog.dart';
 import 'package:kritproduct/widget/register.dart';
 import 'package:kritproduct/widget/mainmenu.dart';
 
-//import 'main_menu.dart';
-
 //สร้าง Authen Ctrl Z = เรียกคืนตั้งแต่ตัน
 class Authen extends StatefulWidget {
   @override
@@ -168,8 +166,8 @@ class _AuthenState extends State<Authen> {
           if (password == userModel.password) {
             MaterialPageRoute materialPageRoute =
                 MaterialPageRoute(builder: (BuildContext buildContext) {
-              return Menus(userModel: userModel,);
               //return ListProduct(userModel: userModel,);
+              return Menus(userModel: userModel,);
             });
             Navigator.of(context).push(materialPageRoute);
           } else {
