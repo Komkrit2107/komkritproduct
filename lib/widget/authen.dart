@@ -1,13 +1,16 @@
 import 'dart:convert';
-import 'dart:ffi';
+//import 'dart:ffi';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:kritproduct/utility/models/user_model.dart';
 import 'package:kritproduct/utility/my_style.dart';
 import 'package:kritproduct/utility/normal_dialog.dart';
-import 'package:kritproduct/widget/list_product.dart';
+//import 'package:kritproduct/widget/list_product.dart';
 import 'package:kritproduct/widget/register.dart';
+import 'package:kritproduct/widget/mainmenu.dart';
+
+//import 'main_menu.dart';
 
 //สร้าง Authen Ctrl Z = เรียกคืนตั้งแต่ตัน
 class Authen extends StatefulWidget {
@@ -31,10 +34,13 @@ class _AuthenState extends State<Authen> {
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: MyStyle().textColor,
+              color: MyStyle().b1,
             ),
           ),
-          hintStyle: TextStyle(color: MyStyle().textColor),
+          hintStyle: TextStyle(
+            fontFamily: 'RobotoMono',
+            fontSize: 20.0,
+            color: MyStyle().b1),
           hintText: 'User :',
         ),
       ),
@@ -53,10 +59,13 @@ class _AuthenState extends State<Authen> {
         decoration: InputDecoration(
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
-              color: MyStyle().textColor,
+              color: MyStyle().b1,
             ),
           ),
-          hintStyle: TextStyle(color: MyStyle().textColor),
+          hintStyle: TextStyle(
+            fontFamily: 'RobotoMono',
+            fontSize: 20.0,
+            color: MyStyle().b1),
           hintText: 'Password :',
         ),
       ),
@@ -66,7 +75,7 @@ class _AuthenState extends State<Authen> {
   //Method ให้แสดงส่วนด้านล่าง โดยการเอา แสดง Logo()
   Widget showLogo() {
     return Container(
-      height: 120.0,
+      height: 80.0,
       child: Image.asset('images/logo12.png'),
     );
   }
@@ -74,24 +83,41 @@ class _AuthenState extends State<Authen> {
   //กำหนดสีต่าง ๆ และสร้าง Function เพื่อ Call MyStyle() ที่กำหนด
   Widget showAppName() {
     return Text(
-      'Wealthrepublic',
+      'Wealth Republic Mutual Fund Brokerage Securities Co.,Ltd. ',
       style: TextStyle(
-        fontSize: 20.0,
+        fontFamily: 'RobotoMono',
+        fontSize: 14.0,
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
-        color: MyStyle().textColor,
+        color: MyStyle().b1,
       ),
     );
   }
 
-   Widget showsAppName() {
+
+ Widget showThaiName() {
     return Text(
-      'SmartFund Link V 1.8',
+      'บริษัทหลักทรัพย์นายหน้าซื้อขายหน่วยลงทุน เวลท์ รีพับบลิค จำกัด',
       style: TextStyle(
-        fontSize: 20.0,
+        fontFamily: 'RobotoMono',
+        fontSize: 14.0,
         fontWeight: FontWeight.normal,
         fontStyle: FontStyle.normal,
-        color: MyStyle().textColor,
+        color: MyStyle().b1,
+      ),
+    );
+  }
+
+
+   Widget showsAppName() {
+    return Text(
+      'SmartFund Link V 1.8+',
+      style: TextStyle(
+        fontFamily: 'RobotoMono',
+        fontSize: 30.0,
+        fontWeight: FontWeight.normal,
+        fontStyle: FontStyle.normal,
+        color: MyStyle().b1,
       ),
     );
   }
@@ -101,10 +127,13 @@ class _AuthenState extends State<Authen> {
 
   Widget signInButton() {
     return RaisedButton(
-      color: MyStyle().textColor,
+      color: MyStyle().b1,
       child: Text(
         'Sign In',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 20.0,
+          color: Colors.white),
       ),
       onPressed: () {
         if (user == null ||
@@ -139,7 +168,8 @@ class _AuthenState extends State<Authen> {
           if (password == userModel.password) {
             MaterialPageRoute materialPageRoute =
                 MaterialPageRoute(builder: (BuildContext buildContext) {
-              return ListProduct(userModel: userModel,);
+              return Menus(userModel: userModel,);
+              //return ListProduct(userModel: userModel,);
             });
             Navigator.of(context).push(materialPageRoute);
           } else {
@@ -154,10 +184,10 @@ class _AuthenState extends State<Authen> {
   // สร้างปุ่ม ลงทะเบียน ก่อน
   Widget singUpButton() {
     return OutlineButton(
-      borderSide: BorderSide(color: MyStyle().textColor),
+      borderSide: BorderSide(color: MyStyle().b1),
       child: Text(
         'Sign Up',
-        style: TextStyle(color: MyStyle().textColor),
+        style: TextStyle(color: MyStyle().b1),
       ),
       onPressed: () {
         print('You Click SignUp');
@@ -173,10 +203,27 @@ class _AuthenState extends State<Authen> {
   //ต้องการขายช่องห่าง และความสูงของ ปุ่ม
   Widget mySizebox() {
     return SizedBox(
+      width: 20.0,
+      height: 10.0,
+    );
+  }
+
+Widget mySpacebox() {
+    return SizedBox(
+      width: 5.0,
+      height: 40.0,
+    );
+  }
+
+Widget mySpace10box() {
+    return SizedBox(
       width: 5.0,
       height: 10.0,
     );
   }
+
+
+
   //ประกาศ ปุ่มเพื่อทำการ Login center ให้อยู่ตรงกลาง
 
   Widget showButton() {
@@ -197,8 +244,8 @@ class _AuthenState extends State<Authen> {
       body: Container(
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: <Color>[Colors.white, MyStyle().mainColor],
-            radius: 1.0,
+            colors: <Color>[Colors.white, MyStyle().main2Color],
+            radius: 40.0,
           ),
         ),
         child: Center(
@@ -206,12 +253,19 @@ class _AuthenState extends State<Authen> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               showsAppName(),
+              mySpacebox(),
               showLogo(),
+              mySpace10box(),
+              mySpace10box(),
+              showThaiName(),
               showAppName(),
+              mySpacebox(),
               userForm(),
               passwordForm(),
               mySizebox(),
               showButton(),
+              mySpace10box(),
+              mySpace10box(),
             ],
           ),
         ),

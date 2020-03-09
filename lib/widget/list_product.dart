@@ -33,7 +33,7 @@ class _ListProductState extends State<ListProduct> {
     return Text('SmartFund Link');
   }
 
- Widget FundForm() {
+ Widget fundForm() {
     //ประกาศตัวแปร เป็นสี
     Color color = Colors.purple;
     return TextField(
@@ -77,7 +77,7 @@ class _ListProductState extends State<ListProduct> {
        body: ListView(
         padding: EdgeInsets.all(30.0),
         children: <Widget>[
-        FundForm(),  
+        fundForm(),  
         ],
       ),
       appBar: AppBar(actions: <Widget>[showName()],

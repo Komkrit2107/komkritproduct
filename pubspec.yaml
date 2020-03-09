@@ -20,10 +20,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+ 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2 
+  # cupertino_icons: ^0.1.2 
   dio: ^3.0.8 
+  url_launcher: ^5.2.3
+  # url_launcher_web: ^0.1.0+1
+# http: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -72,3 +76,14 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Raleway
+      fonts:
+        - asset: fonts/THAISANSNEUE-LIGHT.ttf
+        - asset: fonts/THAISANSNEUE-LIGHTITALIC.ttf
+          style: italic
+    - family: RobotoMono
+      fonts:
+        - asset: fonts/THAISANSNEUE-ULTRABOLD.ttf
+        - asset: fonts/THAISANSNEUE-ULTRABOLDITALI.ttf
+          weight: 700

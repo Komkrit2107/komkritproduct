@@ -8,6 +8,7 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
+//
 class _RegisterState extends State<Register> {
   //Field ประกาศตัวแปร
   String name, user, password, rePassword ;
@@ -16,7 +17,7 @@ class _RegisterState extends State<Register> {
   //Method กำหนดรูปคน และกำหนดค่าสี
   Widget nameForm() {
     //ประกาศตัวแปร เป็นสี
-    Color color = Colors.purple.shade700;
+    Color color = Colors.black87;
     return TextField(
       onChanged: (String string) {
         name = string.trim();
@@ -25,10 +26,16 @@ class _RegisterState extends State<Register> {
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: color),
           ),
-          helperStyle: TextStyle(color: color),
+          helperStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 16.0,
+          color: color),
           helperText: 'Type Your Name in blank',
-          labelStyle: TextStyle(color: color),
-          labelText: 'User Name:',
+          labelStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 18.0,
+          color: color),
+          labelText: 'User Name / ชื่อนามสกุล',
           icon: Icon(
             Icons.person,
             size: 36.0,
@@ -39,12 +46,32 @@ class _RegisterState extends State<Register> {
   
   //Title Bar นำไปใส่ไว้ใน Appbar
   Widget showSTitle() {
-    return Text('Register');
+    return Text('Register / ลงทะเบียน',
+    style: TextStyle(
+        fontFamily: 'RobotoMono',
+        fontSize: 25.0,
+        fontWeight: FontWeight.normal,
+        fontStyle: FontStyle.normal,
+        color: MyStyle().colorWhite,),
+    )
+    ;
+  }
+Widget show2Logo() {
+    return Container(
+      height: 80.0,
+      child: Image.asset('images/logo12.png'),
+    );
+  }
+Widget mySpacenew10box() {
+    return SizedBox(
+      width: 5.0,
+      height: 15.0,
+    );
   }
 
   Widget emailForm() {
     //ประกาศตัวแปร เป็นสี
-    Color color = Colors.purple;
+    Color color = Colors.black87;
     return TextField(
       onChanged: (String string) {
         user = string.trim();
@@ -53,12 +80,18 @@ class _RegisterState extends State<Register> {
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: color),
           ),
-          helperStyle: TextStyle(color: color),
-          helperText: 'Type Your Name in blank',
-          labelStyle: TextStyle(color: color),
-          labelText: 'Email Address:',
+          helperStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 16.0,
+          color: color),
+          helperText: 'Type Your User Login in blank',
+          labelStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 18.0,  
+          color: color),
+          labelText: 'User Login:',
           icon: Icon(
-            Icons.mail_outline,
+            Icons.person,
             size: 36.0,
             color: color,
           )),
@@ -67,7 +100,7 @@ class _RegisterState extends State<Register> {
 
    Widget telephonForm() {
     //ประกาศตัวแปร เป็นสี
-    Color color = Colors.purple;
+    Color color = Colors.black87;
     return TextField(
       onChanged: (String string) {
         telephone = string.trim();
@@ -76,9 +109,15 @@ class _RegisterState extends State<Register> {
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: color),
           ),
-          helperStyle: TextStyle(color: color),
+          helperStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 16.0,
+          color: color),
           helperText: 'Type Your Telephone in blank',
-          labelStyle: TextStyle(color: color),
+          labelStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 18.0,
+          color: color),
           labelText: 'Telephone No:',
           icon: Icon(
             Icons.phone_in_talk,
@@ -90,7 +129,7 @@ class _RegisterState extends State<Register> {
 
   Widget passwordForm() {
     //ประกาศตัวแปร เป็นสี
-    Color color = Colors.blueGrey;
+    Color color = Colors.black87;
     return TextField(
       obscureText: true,
       onChanged: (String string) {
@@ -100,8 +139,11 @@ class _RegisterState extends State<Register> {
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: color),
           ),
-          helperStyle: TextStyle(color: color),
-          helperText: 'Type Your Name in blank',
+          helperStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 16.0,
+          color: color),
+          helperText: 'Type Your Password in blank',
           labelStyle: TextStyle(color: color),
           labelText: 'Password:',
           icon: Icon(
@@ -114,7 +156,7 @@ class _RegisterState extends State<Register> {
 
   Widget rePasswordForm() {
     //ประกาศตัวแปร เป็นสี
-    Color color = Colors.purple;
+    Color color = Colors.black87;
     return TextField(
       obscureText: true,
       onChanged: (String string) {
@@ -124,8 +166,11 @@ class _RegisterState extends State<Register> {
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: color),
           ),
-          helperStyle: TextStyle(color: color),
-          helperText: 'Type Your Name in blank',
+          helperStyle: TextStyle(
+          fontFamily: 'RobotoMono',
+          fontSize: 16.0,
+          color: color),
+          helperText: 'Type Your Re Password in blank',
           labelStyle: TextStyle(color: color),
           labelText: 'Re Password :',
           icon: Icon(
@@ -185,6 +230,8 @@ class _RegisterState extends State<Register> {
       body: ListView(
         padding: EdgeInsets.all(30.0),
         children: <Widget>[
+          show2Logo(),
+          mySpacenew10box(),
           nameForm(),
           emailForm(),
           telephonForm(),
@@ -195,7 +242,7 @@ class _RegisterState extends State<Register> {
       appBar: AppBar(
         title: showSTitle(),
         actions: <Widget>[registerButton()],
-        backgroundColor: MyStyle().textColor,
+        backgroundColor: MyStyle().b1,
       ), //ดึงมาจาก Mystype ใส่รูป Icon เป็นก้อนเมฆ
     );
   }
